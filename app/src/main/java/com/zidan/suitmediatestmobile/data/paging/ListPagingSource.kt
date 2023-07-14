@@ -2,10 +2,8 @@ package com.zidan.suitmediatestmobile.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import androidx.recyclerview.widget.DiffUtil
 import com.zidan.suitmediatestmobile.data.api.ApiService
 import com.zidan.suitmediatestmobile.data.response.DataItem
-import java.lang.Exception
 
 class ListPagingSource (private val apiService: ApiService) : PagingSource<Int, DataItem>() {
 

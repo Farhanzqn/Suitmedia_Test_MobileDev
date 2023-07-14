@@ -2,10 +2,9 @@ package com.zidan.suitmediatestmobile.ui.main
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.Preference
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -54,10 +53,9 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.layoutManager = LinearLayoutManager(this)
 
         val listUserAdapter = ListAdapter { selectedUser ->
-            val fullName = selectedUser
             val intent = Intent(this, SecondActivity::class.java)
             intent.putExtra("selectedUser", selectedUser)
-            Toast.makeText(this, "You Choose: $fullName", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You Choose: $selectedUser", Toast.LENGTH_SHORT).show()
             startActivity(intent)
             viewModel.saveSelectedUser(selectedUser) }
 

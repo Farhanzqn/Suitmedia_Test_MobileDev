@@ -9,8 +9,6 @@ android {
     namespace 'com.zidan.suitmediatestmobile'
     compileSdk 33
 
-
-
     buildFeatures{
         viewBinding true
         buildConfig = true
@@ -25,6 +23,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        multiDexEnabled = true
 
         buildConfigField("String", "BASE_URL", "\"https://reqres.in/api/\"")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -71,4 +70,6 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+
+    implementation("androidx.multidex:multidex:2.0.1")
 }
