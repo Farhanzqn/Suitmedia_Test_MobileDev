@@ -17,6 +17,7 @@ import com.zidan.suitmediatestmobile.data.adapter.ListAdapter
 import com.zidan.suitmediatestmobile.data.adapter.LoadingStateAdapter
 import com.zidan.suitmediatestmobile.databinding.ActivityMainBinding
 import com.zidan.suitmediatestmobile.model.UserPreference
+import com.zidan.suitmediatestmobile.ui.second.SecondActivity
 
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -51,14 +52,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeAction() {
         binding.rvUser.layoutManager = LinearLayoutManager(this)
-        val listUserAdapter = ListAdapter { selectedUser -> viewModel.saveSelectedUser(selectedUser) }
+
+        val listUserAdapter = ListAdapter { selectedUser ->
+            val fullName = selectedUser
+            val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("selectedUser", selectedUser)
+            Toast.makeText(this, "You Choose: $fullName", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
+            viewModel.saveSelectedUser(selectedUser) }
+
         binding.rvUser.adapter = listUserAdapter.withLoadStateFooter(
             footer = LoadingStateAdapter {
                 listUserAdapter.retry()
             }
         )
+
         viewModel.users.observe(this) { pagingData ->
             listUserAdapter.submitData(lifecycle, pagingData)
+
         }
     }
 }

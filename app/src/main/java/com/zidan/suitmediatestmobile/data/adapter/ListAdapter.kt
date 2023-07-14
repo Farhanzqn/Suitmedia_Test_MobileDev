@@ -12,21 +12,24 @@ import com.zidan.suitmediatestmobile.databinding.ItemListBinding
 class ListAdapter(
     private val onClickAction: (String) -> Unit
 ) : PagingDataAdapter<DataItem,ListAdapter.ListViewHolder>(DIFF_CALLBACK) {
-    override fun onBindViewHolder(holder: ListAdapter.ListViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val data = getItem(position)
         if (data != null) {
             holder.bind(data)
             holder.itemView.setOnClickListener {
-                onClickAction("${data.firstName} ${data.lastName}")
+                val fullName = "${data.firstName} ${data.lastName}"
+                onClickAction(fullName)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdapter.ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemListBinding.inflate(LayoutInflater
             .from(parent.context),parent,false)
         return ListViewHolder(binding)
     }
+
     class ListViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DataItem) {

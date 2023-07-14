@@ -50,6 +50,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun initializeActions() {
+
         viewModel. getGreeting(). observe(this) { data ->
             binding.tvUser.text = data.user
             binding.tvSelectedUser.text = data.selectedUser
